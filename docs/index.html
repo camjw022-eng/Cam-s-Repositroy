@@ -8,13 +8,16 @@
     :root {
       --bg: #0d1117;
       --surface: #161b22;
+      --surface-hover: #1c2128;
       --border: #30363d;
       --text: #c9d1d9;
       --muted: #8b949e;
       --accent: #58a6ff;
+      --success: #3fb950;
       --tag-bg: rgba(56, 139, 253, 0.15);
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg);
@@ -23,26 +26,91 @@
       padding: 0;
       line-height: 1.5;
     }
-    header {
-      background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+
+    /* Sticky Top Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
-      padding: 48px 20px 36px;
+      padding: 12px 20px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand {
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #ffffff; }
+
+    /* Hero Header */
+    header {
+      background: radial-gradient(circle at top, #1b2432 0%, #0d1117 70%);
+      border-bottom: 1px solid var(--border);
+      padding: 52px 20px 40px;
       text-align: center;
     }
     header h1 {
-      margin: 0 0 10px;
-      font-size: 2.2rem;
+      margin: 0 0 12px;
+      font-size: 2.4rem;
       color: #ffffff;
+      letter-spacing: -0.5px;
     }
     header p {
-      margin: 0 auto 20px;
-      max-width: 600px;
+      margin: 0 auto 24px;
+      max-width: 620px;
       color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .stats-bar {
+      display: inline-flex;
+      gap: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 10px 24px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+      font-size: 0.85rem;
+    }
+    .stats-bar span strong {
+      color: #ffffff;
+      font-size: 0.95rem;
     }
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
     .social-links a {
@@ -50,39 +118,51 @@
       text-decoration: none;
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 20px;
+      padding: 7px 16px;
+      border-radius: 8px;
       font-size: 0.85rem;
-      transition: border-color 0.2s, color 0.2s;
+      transition: all 0.2s;
     }
     .social-links a:hover {
       border-color: var(--accent);
       color: var(--accent);
+      background: var(--surface-hover);
     }
+
     .container {
-      max-width: 1050px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 36px 20px 60px;
+      padding: 40px 20px 70px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     .section-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: #ffffff;
-      margin: 0 0 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      margin: 0;
     }
+    .result-count {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
     /* Featured Spotlight */
     .featured {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
-      margin-bottom: 48px;
+      margin-bottom: 52px;
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
+      grid-template-columns: 1.45fr 1fr;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 800px) {
       .featured { grid-template-columns: 1fr; }
     }
     .featured video {
@@ -92,7 +172,7 @@
       display: block;
     }
     .featured-info {
-      padding: 28px;
+      padding: 30px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -102,36 +182,47 @@
       background: var(--tag-bg);
       color: var(--accent);
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
       padding: 4px 10px;
       border-radius: 12px;
       margin-bottom: 12px;
       width: fit-content;
+      letter-spacing: 0.4px;
     }
     .featured-info h2 {
       margin: 0 0 10px;
       color: #ffffff;
-      font-size: 1.5rem;
+      font-size: 1.55rem;
     }
     .featured-info p {
       color: var(--muted);
-      margin: 0 0 16px;
+      margin: 0 0 18px;
+      font-size: 0.95rem;
     }
-    /* Filter Bar */
+
+    /* Search & Filter Toolbar */
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
     .filters {
       display: flex;
       gap: 8px;
-      margin-bottom: 24px;
       flex-wrap: wrap;
     }
     .filter-btn {
       background: var(--surface);
       color: var(--text);
       border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
       cursor: pointer;
       font-size: 0.85rem;
+      transition: all 0.15s;
     }
     .filter-btn.active, .filter-btn:hover {
       background: var(--accent);
@@ -139,30 +230,97 @@
       border-color: var(--accent);
       font-weight: 600;
     }
-    /* Video Grid */
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 240px;
+      max-width: 340px;
+    }
+    .search-box input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: #ffffff;
+      padding: 8px 60px 8px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box input:focus {
+      border-color: var(--accent);
+    }
+    .search-hint {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.72rem;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    .clear-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1rem;
+      display: none;
+    }
+    .clear-btn:hover { color: #ffffff; }
+
+    /* Video Grid & Cards */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
       gap: 24px;
     }
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
       transition: transform 0.2s, border-color 0.2s;
     }
     .card:hover {
       transform: translateY(-3px);
       border-color: var(--accent);
     }
+    .video-wrap {
+      position: relative;
+      background: #000;
+    }
     .card video {
       width: 100%;
       display: block;
-      background: #000;
+    }
+    .duration-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(13, 17, 23, 0.85);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      pointer-events: none;
     }
     .info {
       padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
     .meta {
       display: flex;
@@ -178,9 +336,18 @@
       font-size: 1.1rem;
     }
     .info p {
-      margin: 0 0 14px;
+      margin: 0 0 16px;
       font-size: 0.9rem;
       color: var(--muted);
+      flex: 1;
+    }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
     }
     .tags {
       display: flex;
@@ -193,11 +360,71 @@
       font-size: 0.75rem;
       padding: 2px 8px;
       border-radius: 4px;
+      cursor: pointer;
     }
+    .tag:hover { text-decoration: underline; }
+    .share-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .share-btn:hover {
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+    .share-btn.copied {
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    /* Empty State */
+    .empty-state {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+    }
+    .empty-state h3 { margin: 0 0 8px; color: #ffffff; }
+    .empty-state p { margin: 0 0 16px; color: var(--muted); }
+    .reset-btn {
+      background: var(--accent);
+      color: #0d1117;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Back to Top Button */
+    #topBtn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--surface);
+      color: #ffffff;
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    #topBtn:hover { border-color: var(--accent); }
+
     footer {
       border-top: 1px solid var(--border);
       text-align: center;
-      padding: 24px 20px;
+      padding: 28px 20px;
       color: var(--muted);
       font-size: 0.85rem;
     }
@@ -205,103 +432,5 @@
 </head>
 <body>
 
-  <header>
-    <h1>Cam's Video Highlights</h1>
-    <p>Welcome to my highlight reel. Browse my top clips, breakdowns, and favorite moments below.</p>
-    <div class="social-links">
-      <a href="https://github.com" target="_blank">GitHub</a>
-      <a href="#" target="_blank">YouTube</a>
-      <a href="#" target="_blank">Discord / Contact</a>
-    </div>
-  </header>
-
-  <div class="container">
-
-    <!-- FEATURED VIDEO -->
-    <div class="section-title">Featured Highlight</div>
-    <div class="featured">
-      <video controls preload="metadata">
-        <source src="clip1.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <div class="featured-info">
-        <span class="badge">TOP PICK • NOV 2026</span>
-        <h2>Best Play / Main Demo</h2>
-        <p>Write a couple of sentences here explaining what makes this highlight stand out, the setup behind it, or the key moment to watch for.</p>
-        <div class="tags">
-          <span class="tag">#Featured</span>
-          <span class="tag">#1080p</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ALL CLIPS WITH FILTER BUTTONS -->
-    <div class="section-title">All Highlights</div>
-    <div class="filters">
-      <button class="filter-btn active" onclick="filterClips('all', this)">All</button>
-      <button class="filter-btn" onclick="filterClips('category1', this)">Category 1</button>
-      <button class="filter-btn" onclick="filterClips('category2', this)">Category 2</button>
-    </div>
-
-    <div class="gallery">
-      <!-- CLIP 1 -->
-      <div class="card" data-category="category1">
-        <video controls preload="metadata">
-          <source src="clip1.mp4" type="video/mp4">
-        </video>
-        <div class="info">
-          <div class="meta">
-            <span>Category 1</span>
-            <span>Nov 2026</span>
-          </div>
-          <h3>Highlight #1 Title</h3>
-          <p>Short description of what happens in this clip.</p>
-          <div class="tags">
-            <span class="tag">#Clutch</span>
-            <span class="tag">#Season1</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- CLIP 2 -->
-      <div class="card" data-category="category2">
-        <video controls preload="metadata">
-          <source src="clip2.mp4" type="video/mp4">
-        </video>
-        <div class="info">
-          <div class="meta">
-            <span>Category 2</span>
-            <span>Oct 2026</span>
-          </div>
-          <h3>Highlight #2 Title</h3>
-          <p>Short description of what happens in this clip.</p>
-          <div class="tags">
-            <span class="tag">#Demo</span>
-            <span class="tag">#Montage</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <footer>
-    Built &amp; hosted on GitHub Pages • © 2026 Cam
-  </footer>
-
-  <script>
-    function filterClips(category, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.card').forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-  </script>
-
-</body>
-</html>
+  <!-- STICKY NAVIGATION -->
+  <nav>
